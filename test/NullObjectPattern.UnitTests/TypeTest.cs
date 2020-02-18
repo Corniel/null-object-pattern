@@ -17,12 +17,12 @@ namespace NullObjectPattern.UnitTests
         [Test]
         public void Null_ReturnsNullType()
         {
-            var actual = Nil.Value<Type>().NullObjectIfNull();
+            var actual = default(Type).NullObjectIfNull();
 
             var props = PropertyValues.FromInstance(actual);
             var expected = new PropertyValues
             {
-                { nameof(Type.Assembly), Nil.Value<Assembly>().NullObjectIfNull() },
+                { nameof(Type.Assembly), System.Reflection.NullObject.Assembly },
                 { nameof(Type.AssemblyQualifiedName), string.Empty },
                 { nameof(Type.Attributes), TypeAttributes.Class },
                 { nameof(Type.BaseType), null },
@@ -85,14 +85,14 @@ namespace NullObjectPattern.UnitTests
                 { nameof(Type.IsVisible), false },
                 { nameof(Type.MemberType), default(MemberTypes) },
                 { nameof(Type.MetadataToken), 0 },
-                { nameof(Type.Module), Nil.Value<Module>().NullObjectIfNull() },
+                { nameof(Type.Module), System.Reflection.NullObject.Module },
                 { nameof(Type.Name), string.Empty },
                 { nameof(Type.Namespace), string.Empty },
-                { nameof(Type.ReflectedType),  Nil.Value<Type>().NullObjectIfNull() },
+                { nameof(Type.ReflectedType),  System.NullObject.Type  },
                 { nameof(Type.StructLayoutAttribute), new StructLayoutAttribute(LayoutKind.Sequential) },
                 { nameof(Type.TypeHandle), default(RuntimeTypeHandle) },
                 { nameof(Type.TypeInitializer), null },
-                { nameof(Type.UnderlyingSystemType), Nil.Value<Type>().NullObjectIfNull() },
+                { nameof(Type.UnderlyingSystemType), System.NullObject.Type },
             };
 
             PropertyAssert.AreEqual(expected, props);

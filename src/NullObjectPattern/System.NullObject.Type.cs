@@ -3,24 +3,24 @@
 // Copyright © Corniel Nobel 2019-current
 // </copyright>
 //-----------------------------------------------------------------------
-using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Reflection;
 using System.Runtime.InteropServices;
 
-namespace NullObjectPattern
+namespace System
 {
-    public static partial class NullObjectExtensions
+    public static partial class NullObject
     {
-        /// <summary>Gets the <see cref="Type"/> value if not null, otherwise the <see cref="Type"/> null-object value.</summary>
-        public static Type NullObjectIfNull([ValidatedNotNull]this Type type) => type ?? NullType.Nil;
+        /// <summary>The null object representation of <see cref="System.Type"/>.</summary>
+        public static readonly Type Type = new NullType();
+
+        /// <summary>Gets the <see cref="Type"/> value if not null, otherwise the <see cref="System.Type"/> null-object value.</summary>
+        public static Type NullObjectIfNull([ValidatedNotNull]this Type type) => type ?? Type;
 
         private class NullType : Type
         {
-            public static readonly NullType Nil = new NullType();
-
-            public override Assembly Assembly => NullAssembly.Nil;
+            public override Assembly Assembly => Reflection.NullObject.Assembly;
             public override string AssemblyQualifiedName => string.Empty; public override Type BaseType => null;
             public override bool ContainsGenericParameters => false;
             public override IEnumerable<CustomAttributeData> CustomAttributes => Array.Empty<CustomAttributeData>();
@@ -43,7 +43,7 @@ namespace NullObjectPattern
 
             public override MemberTypes MemberType => default;
             public override int MetadataToken => 0;
-            public override Module Module => NullModule.Nil;
+            public override Module Module => Reflection.NullObject.Module;
             public override string Name => string.Empty;
             public override string Namespace => string.Empty;
             public override Type ReflectedType => this;
